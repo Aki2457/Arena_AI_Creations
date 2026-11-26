@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Lobby -->
+  <section id="lobby" class="card">
+    <div class="logo">🎙️</div>
+    <h1>Voice Chat</h1>
+    <p class="sub">Talk live with friends in your browser. Pick a room, share the link, and start talking.</p>
+
+    <form id="joinForm">
+      <label>
+        <span>Your name</span>
+        <input id="nameInput" maxlength="24" placeholder="e.g. Aki" required autocomplete="nickname" />
+      </label>
+      <label>
+        <span>Room</span>
+        <div class="row">
+          <input id="roomInput" maxlength="32" placeholder="room-name" required pattern="[a-zA-Z0-9_-]+" title="Letters, numbers, - and _ only" />
+          <button type="button" id="randomRoom" class="ghost" title="Random room">🎲</button>
+        </div>
+      </label>
+      <button type="submit" id="joinBtn" class="primary">Join voice room</button>
+      <p id="lobbyError" class="error" hidden></p>
+    </form>
+  </section>
+
+  <!-- Room -->
+  <section id="room" class="card" hidden>
+    <header class="room-head">
+      <div>
+        <div class="label">Room</div>
+        <h2 id="roomName"></h2>
+      </div>
+      <button id="copyLink" class="ghost small">🔗 Copy invite link</button>
+    </header>
+
+    <p id="status" class="status">Connecting…</p>
+
+    <ul id="participants" class="participants"></ul>
+
+    <footer class="controls">
+      <button id="muteBtn" class="control" title="Mute / unmute">
+        <span class="icon">🎤</span><span class="txt">Mute</span>
+      </button>
+      <button id="leaveBtn" class="control danger" title="Leave room">
+        <span class="icon">📞</span><span class="txt">Leave</span>
+      </button>
+    </footer>
+  </section>
+
+  <div id="audioSink" hidden></div>
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="vendor/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
